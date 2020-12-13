@@ -1,0 +1,33 @@
+<table class="table table-hover">
+    <th *ngFor="let column of header">
+        {{column}}
+    </th>
+
+    <tr *ngFor="let pd of users">
+
+        <td>
+            {{pd.id}}
+        </td>
+        <td>
+            {{pd.title}}
+        </td>
+        <td>
+            {{pd.firstName}}
+        </td>
+        <td>
+            {{pd.lastName}}
+        </td>
+        <td>
+            {{pd.email}}
+        </td>
+        <td>
+            {{pd.gender}}
+        </td>
+        <button class="btn btn-danger mr-1" type="submit" (click)="onDelete(pd.id)">Delete</button>
+        <button class="btn btn-primary mr-1" routerLink="/Registration/{{pd.id}}">Edit</button>
+        <!-- <button class="btn btn-primary mr-1" (click)="onEdit(pd.id)">Edit</button> -->
+
+
+    </tr>
+
+</table>

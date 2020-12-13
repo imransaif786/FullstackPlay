@@ -7,3 +7,6 @@ create migration
             dotnet ef migrations add initial
 create/update database
         dotnet ef database update
+
+
+

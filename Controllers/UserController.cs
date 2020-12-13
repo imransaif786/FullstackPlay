@@ -19,6 +19,7 @@ namespace FullstackPlay.Controllers
         {
             _context = context;
         }
+        // GET: api/BlogPosts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserViewModel>>> GetUser()
         {
@@ -26,24 +27,33 @@ namespace FullstackPlay.Controllers
                 .Select(x => MapToViewModel(x))
                 .ToListAsync();
         }
-
-       
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserViewModel userViewModel)
+        // GET: api/BlogPosts/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserViewModel>> GetUser(int id)
         {
-            if (id != userViewModel.Id)
+            var userModel = await _context.Users.FindAsync(id);
+
+            if (userModel == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
+            return MapToViewModel(userModel);
+        }
+        // PUT: api/BlogPosts/5
+        [HttpPut("{id}")]
+         public async Task<IActionResult> UpdateUser(int id, UserViewModel userViewModel)
+        {
             var userModel = await _context.Users.FindAsync(id);
             if (userModel == null)
             {
                 return NotFound();
             }
+            userModel.Title = userViewModel.Title;
             userModel.FirstName = userViewModel.FirstName;
             userModel.LastName = userViewModel.LastName;
             userModel.Email = userViewModel.Email;
+            userModel.Gender = userViewModel.Gender;
             userModel.Password = userViewModel.Password;
             userModel.ConfirmPassword = userViewModel.ConfirmPassword;
             userModel.AcceptTerms = userViewModel.AcceptTerms;
@@ -59,26 +69,17 @@ namespace FullstackPlay.Controllers
 
             return NoContent();
         }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserViewModel>> GetUser(int id)
-        {
-            var userModel = await _context.Users.FindAsync(id);
-
-            if (userModel == null)
-            {
-                return NotFound();
-            }
-
-            return MapToViewModel(userModel);
-        }
+        // POST: api/BlogPosts
         [HttpPost]
         public async Task<ActionResult<UserViewModel>> CreateUser(UserViewModel UserDTO)
         {
             var newData = new User
             {
+                Title = UserDTO.Title,
                 FirstName = UserDTO.FirstName,
                 LastName = UserDTO.LastName,
                 Email = UserDTO.Email,
+                Gender = UserDTO.Gender,
                 Password = UserDTO.Password,
                 ConfirmPassword = UserDTO.ConfirmPassword,
                 AcceptTerms = UserDTO.AcceptTerms
@@ -115,9 +116,11 @@ namespace FullstackPlay.Controllers
            new UserViewModel
            {
                Id = user.Id,
+               Title = user.Title,
                FirstName = user.FirstName,
                LastName = user.LastName,
                Email = user.Email,
+               Gender = user.Gender,
                Password = user.Password,
                ConfirmPassword = user.ConfirmPassword,
                AcceptTerms = user.AcceptTerms

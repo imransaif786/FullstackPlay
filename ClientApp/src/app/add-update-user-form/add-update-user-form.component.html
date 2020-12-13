@@ -19,7 +19,6 @@
                         <div *ngIf="f.title.errors.required">Title is required</div>
                     </div>
                 </div>
-              
                 <div class="form-group col-5">
                     <label>First Name</label>
                     <input type="text" formControlName="firstName" class="form-control"
@@ -38,7 +37,7 @@
                 </div>
             </div>
             <div class="form-row">
-            <div class="form-group col-6">
+            <div class="form-group">
                 <label>Email</label>
                 <input type="text" formControlName="email" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
@@ -52,8 +51,8 @@
                 <select formControlName="gender" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
                     <option value="null"></option>
-                    <option [ngValue]="0">Male</option>
-                    <option [ngValue]="1">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="female">Female</option>
                 </select>
                 <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
                     <div *ngIf="f.gender.errors.required">Gender is required</div>
@@ -80,53 +79,19 @@
                     </div>
                 </div>
             </div>
-            <div class="form-row">
+            
             <div class="form-group form-check">
                 <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input"
                     [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
                 <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
                 <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
-                
             </div>
-        </div>
             <div class="text-center">
-                <button class="btn btn-primary mr-1" type="submit">{{btnSave}}</button> &nbsp;
-                <button class="btn btn-success mr-1" type="reset" (click)="onReset()">Reset</button> &nbsp;
-                <button class="btn btn-warning mr-1" type="submit" (click)="onBack()">Back</button>
+                <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Reset</button> &nbsp;
+                <button class="btn btn-primary mr-1" type="submit">{{btnSave}}</button>
+                <button class="btn btn-primary mr-1" (click)="getUserList()">Show data</button>
+
             </div>
         </form>
     </div>
 </div>
-
-<!-- <table class="table table-hover">
-    <th *ngFor = "let column of header">
-        {{column}}
-      </th>
-    
-    <tr *ngFor="let pd of users">
-        
-            <td>
-                {{pd.id}}
-            </td>
-
-        
-        <td>
-            {{pd.title}}
-        </td>
-        <td>
-            {{pd.firstName}}
-        </td>
-        
-        <td>
-            {{pd.lastName}}
-        </td>
-        <td>
-            {{pd.email}}
-        </td>
-        <button class="btn btn-primary mr-1" routerLink="{{pd.id}}">Editnextpage</button>
-        <button class="btn btn-primary mr-1" (click)="onEdit(pd.id)">Edit</button>
-        <button class="btn btn-primary mr-1" type="submit" (click)="onDelete(pd.id)">Delete</button>
-       
-    </tr>
-
-</table> -->
