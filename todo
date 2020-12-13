@@ -1,0 +1,10 @@
+confirm alert box before delete, if cancel, don't delete (use window.confirm)
+Table: UI
+Gender - instead of 0, 1, display Male, Female
+Validation on all fields, including required, email, password, 
+For password, display hint what is the password strength and all the password rules
+Please select... , in all dropdowns
+
+
+Basic definitions:
+Component, Directive, Service, Pipe, Module, HttpClient
